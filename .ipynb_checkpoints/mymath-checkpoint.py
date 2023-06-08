@@ -3,10 +3,25 @@
   {
    "cell_type": "code",
    "execution_count": null,
-   "id": "d5af0e5e",
+   "id": "eae6e590",
    "metadata": {},
    "outputs": [],
-   "source": []
+   "source": [
+    "def add(x, y):\n",
+    "    return x + y\n",
+    "\n",
+    "def subtract(x, y):\n",
+    "    return x - y\n",
+    "\n",
+    "def multiply(x, y):\n",
+    "    return x * y\n",
+    "\n",
+    "def divide(x, y):\n",
+    "    if y == 0:\n",
+    "        return \"0으로 나눌 수 없습니다.\"\n",
+    "    else:\n",
+    "        return x / y\n"
+   ]
   }
  ],
  "metadata": {
