@@ -2,8 +2,8 @@
  "cells": [
   {
    "cell_type": "code",
-   "execution_count": 2,
-   "id": "eae6e590",
+   "execution_count": None,
+   "id": "e76be878",
    "metadata": {},
    "outputs": [],
    "source": [
@@ -20,38 +20,7 @@
     "    if y == 0:\n",
     "        return \"0으로 나눌 수 없습니다.\"\n",
     "    else:\n",
-    "        return x / y\n",
-    "\n",
-    "if __name__ == \"__main__\":\n",
-    "    x = 4\n",
-    "    y = 3\n",
-    "\n",
-    "    print(add(x, y))\n",
-    "    print(subtract(x, y))\n",
-    "    print(multiply(x, y))\n",
-    "    print(divide(x, y))"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 1,
-   "id": "0ee51465",
-   "metadata": {},
-   "outputs": [
-    {
-     "data": {
-      "text/plain": [
-       "'C:\\\\Users\\\\user\\\\Python_jupyter\\\\Python'"
-      ]
-     },
-     "execution_count": 1,
-     "metadata": {},
-     "output_type": "execute_result"
-    }
-   ],
-   "source": [
-    "import os\n",
-    "os.getcwd()"
+    "        return x / y"
    ]
   }
  ],
