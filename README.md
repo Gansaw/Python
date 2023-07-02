@@ -15,9 +15,9 @@ These instructions will get you a copy of the project up and running on your loc
 ### Select Python Tool (need one)
 + Jupyter notebook
   
-    1.  &nbsp;  &nbsp;  install jupyter notebook : anaconda powershell => pip install jupyer notebook
+    ＊  &nbsp;  &nbsp;  install jupyter notebook : anaconda powershell => pip install jupyer notebook
 
-    2.  &nbsp;  &nbsp;  open jupyter notebook : anaconda powershell => jupyter notebook
+    ＊  &nbsp;  &nbsp;  open jupyter notebook : anaconda powershell => jupyter notebook
        
 + [Visual studio code](https://code.visualstudio.com/download)
 + [Colab](https://colab.research.google.com/?utm_source=scs-index)
