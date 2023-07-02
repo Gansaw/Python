@@ -4,9 +4,9 @@
 This is a place where Choi Ho-jin, a 3rd-term K-Digital trainee at Pusan National University, uploads his work while studying Python.
 
 ## Getting Started
-이러한 지침은 개발 및 테스트 목적으로 로컬 컴퓨터에서 프로젝트의 복사본을 설치하고 실행하는 데 사용됩니다. 라이브 시스템에 프로젝트를 배포하는 방법에 대한 참고 사항은 배포를 참조하십시오.
+정상적으로 프로그램을 동작하게 하기 위해서는 다음과 같은 과정을 거쳐야 합니다.
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+Before operating program, you need to accomplish the following step.
 
 ### Prerequired
 + [Python](https://www.python.org/downloads/release/python-3109/) (3.10.9 ver)
