@@ -11,11 +11,18 @@ These instructions will get you a copy of the project up and running on your loc
 ### Prerequired
 + [Python](https://www.python.org/downloads/release/python-3109/) (3.10.9 ver)
 + [Anaconda](https://www.anaconda.com/download) (2023.03-1 ver)
+
+### Select Python Tool (need one)
 + Jupyter notebook
   
     1.  &nbsp;  &nbsp;  install jupyter notebook : anaconda powershell => pip install jupyer notebook
 
     2.  &nbsp;  &nbsp;  open jupyter notebook : anaconda powershell => jupyter notebook
+       
++ [Visual studio code](https://code.visualstudio.com/download)
++ [Colab](https://colab.research.google.com/?utm_source=scs-index)
+
+    ＊ &nbsp;&nbsp; need google account // install is not needed
 
 ### Not required but recommended
 + [D2 Coding Font](https://github.com/naver/d2codingfont)
