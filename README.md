@@ -13,7 +13,7 @@ Before operating program, you need to accomplish the following step.
 + [Anaconda](https://www.anaconda.com/download) (2023.03-1 ver)
 
 ### Python Tools (select one)
-+ Jupyter notebook
++ Jupyter notebook (recommeded)
   
     ＊  &nbsp;  &nbsp;  install jupyter notebook : anaconda powershell => pip install jupyer notebook
 
