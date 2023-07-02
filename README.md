@@ -12,6 +12,7 @@ These instructions will get you a copy of the project up and running on your loc
 + [Python](https://www.python.org/downloads/release/python-3109/) (3.10.9 ver)
 + [Anaconda](https://www.anaconda.com/download) (2023.03-1 ver)
 + Jupyter notebook
+  
    anaconda powershell => pip install jupyer notebook
 
    if you want to open => anaconda powershell => jupyter notebook
