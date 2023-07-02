@@ -22,9 +22,9 @@ Before operating program, you need to accomplish the following step.
 + [Visual studio code](https://code.visualstudio.com/download)
 + [Colab](https://colab.research.google.com/?utm_source=scs-index)
 
-    ＊ &nbsp;&nbsp; need google account
+    ＊ &nbsp;&nbsp; require google account
   
-    ＊ &nbsp;&nbsp; install is not needed
+    ＊ &nbsp;&nbsp; do not need to install
 
 + [Pycharm Community Edition](https://www.jetbrains.com/pycharm/download/?section=windows) (2022.2.1 ver)
 
