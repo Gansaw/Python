@@ -27,6 +27,7 @@ Before operating program, you need to accomplish the following step.
     ＊ &nbsp;&nbsp; do not need to install
 
 + [Pycharm Community Edition](https://www.jetbrains.com/pycharm/download/?section=windows) (2022.2.1 ver)
++ [Thonny](https://thonny.org/) (4.11 ver)
 
 ### Not required but recommended
 + [D2 Coding Font](https://github.com/naver/d2codingfont)
