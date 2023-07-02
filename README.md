@@ -32,7 +32,7 @@ These instructions will get you a copy of the project up and running on your loc
 ### Not required but recommended
 + [D2 Coding Font](https://github.com/naver/d2codingfont)
 
-### import
+### Import
 + os
 + numpy
 + pandas
