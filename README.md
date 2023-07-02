@@ -12,7 +12,7 @@ These instructions will get you a copy of the project up and running on your loc
 + [Python](https://www.python.org/downloads/release/python-3109/) (3.10.9 ver)
 + [Anaconda](https://www.anaconda.com/download) (2023.03-1 ver)
 
-### Select Python Tool (need one)
+### Python Tools (select one)
 + Jupyter notebook
   
     ＊  &nbsp;  &nbsp;  install jupyter notebook : anaconda powershell => pip install jupyer notebook
@@ -24,17 +24,19 @@ These instructions will get you a copy of the project up and running on your loc
 
     ＊ &nbsp;&nbsp; need google account // install is not needed
 
++ [Pycharm Community Edition](https://www.jetbrains.com/pycharm/download/?section=windows) (2022.2.1 ver)
+
+
 ### Not required but recommended
 + [D2 Coding Font](https://github.com/naver/d2codingfont)
 
-### Packages
-+ tidyverse
-+ ggplot2
-+ random Forest
-+ xgboost
-+ prophet
-+ cluster
-+ lubridate
+### import
++ os
++ numpy
++ padas
++ matplotlib
++ sklearn
++ tensorflow
 
 ### License
 이 프로젝트는 MIT 라이선스가 적용되고 있습니다. 세부사항은 LICENSE.md를 참고하세요.
