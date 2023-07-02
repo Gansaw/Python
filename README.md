@@ -13,9 +13,9 @@ These instructions will get you a copy of the project up and running on your loc
 + [Anaconda](https://www.anaconda.com/download) (2023.03-1 ver)
 + Jupyter notebook
   
-    1.  anaconda powershell => pip install jupyer notebook
+    1. anaconda powershell => pip install jupyer notebook
 
-    2.  if you want to open => anaconda powershell => jupyter notebook
+    2. if you want to open => anaconda powershell => jupyter notebook
 
 ### Not required but recommended
 + [D2 Coding Font](https://github.com/naver/d2codingfont)
