@@ -22,7 +22,9 @@ These instructions will get you a copy of the project up and running on your loc
 + [Visual studio code](https://code.visualstudio.com/download)
 + [Colab](https://colab.research.google.com/?utm_source=scs-index)
 
-    ＊ &nbsp;&nbsp; need google account // install is not needed
+    ＊ &nbsp;&nbsp; need google account
+  
+    ＊ &nbsp;&nbsp; install is not needed
 
 + [Pycharm Community Edition](https://www.jetbrains.com/pycharm/download/?section=windows) (2022.2.1 ver)
 
