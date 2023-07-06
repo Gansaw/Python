@@ -1,23 +1,20 @@
-from numeric import *
+from problem import Numeric
 
 
 def main():
-    # Create an instance of numerical optimization problem
-    p = createProblem()   # 'p': (expr, domain)
-    # Call the search algorithm
+    p = Numeric()    
+    p.setVariables()
     solution, minimum = steepestAscent(p)
-    # Show the problem and algorithm settings
-    describeProblem(p)
-    displaySetting()
-    # Report results
-    displayResult(solution, minimum)    
-
+    p.storeResult(solution, minimum)
+    p.describe()
+    displaySetting(p)
+    p.report()
 
 def steepestAscent(p):
-    current = randomInit(p) # 'current' is a list of values
-    valueC = evaluate(current, p)
+    current = Numeric.randomInit(p) 
+    valueC = Numeric.evaluate(current)
     while True:
-        neighbors = mutants(current, p)
+        neighbors = p.mutants(current)
         successor, valueS = bestOf(neighbors, p)
         if valueS >= valueC:
             break
@@ -26,22 +23,21 @@ def steepestAscent(p):
             valueC = valueS
     return current, valueC
 
+def bestOf(neighbors, p):
+    best = neighbors[0]
+    bestValue = Numeric.evaluate(best)
+    for i in range(1,len(neighbors)):
+        value = Numeric.evaluate(neighbors[i])
+        if value < bestValue:
+            best = neighbors[i]
+            bestValue = value
+        
+    return best, bestValue
 
-def mutants(current, p): ###
-    neighbors = []
-    
-    for i in range(len(current)):
-        mutant = mutate(current, i, DELTA, p)        
-        neighbors.append(mutant)        
-        mutant = mutate(current, i, -DELTA, p)
-        neighbors.append(mutant)
-
-    return neighbors     # Return a set of successors
-
-def displaySetting():
+def displaySetting(p):
     print()
     print("Search algorithm: Steepest-Ascent Hill Climbing")
     print()
-    print("Mutation step size:", DELTA)
+    print("Mutation step size:", Numeric.getDelta)
 
 main()
