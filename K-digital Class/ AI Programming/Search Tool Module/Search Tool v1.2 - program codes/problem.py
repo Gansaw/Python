@@ -17,7 +17,7 @@ class Problem:
         
     def evaluate(self):
         pass
-        
+
     def mutants(self):
         pass
         
@@ -38,7 +38,7 @@ class Problem:
 
 class Numeric(Problem):
     def __init__(self):
-        Problem.__init__(self)
+        Problem.__init__(self)   # 중요!!!
         self._expression = ""
         self._domain = []
         self._delta = 0.01
@@ -52,18 +52,18 @@ class Numeric(Problem):
         self._expression = infile.readline()
         varNames = []
         low = []
-        up = []    
+        up = []
+        line = infile.readline()
             
-        for line in infile:              
-            while line != "":
-                data = line.split(",")
-                varNames.append(data[0])
-                low.append(float(data[1]))
-                up.append(float(data[2]))
-                line = infile.readline()        
+        while line != "":
+            data = line.split(",")
+            varNames.append(data[0])
+            low.append(float(data[1]))
+            up.append(float(data[2]))
+            line = infile.readline()
         infile.close()
-
         self._domain = [varNames, low, up]
+        # no return
 
     def randomInit(self):
         domain = self._domain
@@ -76,7 +76,6 @@ class Numeric(Problem):
             init.append(r)
         return init
 
-    
     def evaluate(self, current):  
     
         self._numEval += 1
@@ -86,8 +85,7 @@ class Numeric(Problem):
             assignment = varNames[i] + '=' + str(current[i])
             exec(assignment)
         return eval(expr)
- 
-    
+   
     def mutants(self, current):
         neighbors = []
     
@@ -117,7 +115,6 @@ class Numeric(Problem):
     
         return self.mutate(current, i, d)
 
-
     def describe(self):
         print()
         print("Objective function:")
@@ -129,10 +126,11 @@ class Numeric(Problem):
         for i in range(len(low)):
             print(" " + varNames[i] + ":", (low[i], up[i])) 
 
-    
     def report(self):
         print()
-        print("Solution found:")        
+        print("Solution found:")    
+        print(self.coordinate())    
+        print("Minimum value: {0:,.3f}".format(self._value))
         Problem.report(self)   #Super().report(self)
 
     def coordinate(self):
@@ -145,20 +143,19 @@ class Tsp(Problem):
         Problem.__init__(self)
         self._numCities = 0
         self._locations = []
-        self._distanceTable = []    
+        self._distanceTable = []
 
-    def createProblem(self):
-        fileName = input("Enter the file name of a TSP: ")
-        infile = open(fileName, 'r')    
+    def setVariables(self):
+        fileName = "problem/tsp" + input("Enter the filename of function:") + ".txt"
+        infile = open(fileName, 'r')        
         self._numCities = int(infile.readline())
         self._locations = []
-        line = infile.readline()  # The rest of the lines are locations
+        line = infile.readline() 
         while line != '':
-            self._locations.append(eval(line)) # Make a tuple and append
+            self._locations.append(eval(line)) 
             line = infile.readline()
         infile.close()
-        self._distanceTable = self.calcDistanceTable()
-        
+        self._distanceTable = self.calcDistanceTable()        
 
     def calcDistanceTable(self):
         table = []
@@ -172,7 +169,7 @@ class Tsp(Problem):
                 row.append(distance)
             table.append(row) 
 
-            return table
+        return table
         
     def randomInit(self):   # Return a random initial tour
         n = self._numCities
@@ -226,7 +223,7 @@ class Tsp(Problem):
                 break
         return curCopy
 
-    def describeProblem(self):
+    def describe(self):
         print()
         n = self._numCities
         print("Number of cities:", n)
@@ -237,12 +234,13 @@ class Tsp(Problem):
             if i % 5 == 4:
                 print()
 
-                
     def report(self):
         print()
         print("Best order of visits:")
         self.tenPerRow()
         print("Minimum tour cost: {0:,}".format(round(self._value)))
+        print()
+        print("Total number of evaluations: {0:,}".format(self._numEval))
         Problem.report(self)
 
     def tenPerRow(self):

@@ -1,8 +1,5 @@
 from tsp import *
 
-LIMIT_STUCK = 100 # Max number of evaluations enduring no improvement
-NumEval = 0    # Total number of evaluations
-
 
 def main():
     # Create an instance of TSP

@@ -1,66 +1,40 @@
-from numeric import *
-
+from Problem import Tsp 
 
 def main():
-    # Create an instance of numerical optimization problem
-    p = createProblem()   # 'p': (expr, domain)
-    # Call the search algorithm
-    solution, minimum = steepestAscent(p)
-    # Show the problem and algorithm settings
+    p = Tsp()    
+    solution, minimum = firstChoice(p)
     describeProblem(p)
     displaySetting()
-    # Report results
-    displayResult(solution, minimum)    
+    displayResult(solution, minimum)
 
-
-def steepestAscent(p):
-    current = randomInit(p) # 'current' is a list of values
+def firstChoice(p):
+    current = randomInit(p) 
     valueC = evaluate(current, p)
-    while True:
-        neighbors = mutants(current, p)
-        successor, valueS = bestOf(neighbors, p)
-        if valueS >= valueC:
-            break
-        else:
+    i = 0
+    while i < LIMIT_STUCK: 
+        successor = randomMutant(current, p)
+        valueS = evaluate(successor, p)
+        if valueS < valueC: 
             current = successor
             valueC = valueS
+            i = 0           
+        else:
+            i += 1
     return current, valueC
 
-
-def randomMutant(current, p):
-    i = random.randint(0,len(current)-1)
-    if random.uniform(0, 1)>0.5:
+def randomMutant(current, p): 
+    i = random.randint(0, len(current)-1) 
+    if random.uniform(0,1)>0.5: 
         d = DELTA
     else:
-        d = -DELTA
-    
+        d = -DELTA    
+
     return mutate(current, i, d, p)
 
-def mutants(current, p): ###
-    neighbors = []
-    
-    for i in range(len(current)):
-        mutant = mutate(current, i, DELTA, p)        
-        neighbors.append(mutant)        
-        mutant = mutate(current, i, -DELTA, p)
-        neighbors.append(mutant)        
-    
-    for j in range(len(current)): 
-        for k in range(j+1, len(current)):
-            mutant = mutate(current, j, DELTA, p)
-            neighbors.append(mutant)
-            mutant = mutate(current, j, -DELTA, p)
-            neighbors.append(mutant)
-            mutant = mutate(mutant, k, DELTA, p)
-            neighbors.append(mutant)
-            mutant = mutate(mutant, i, -DELTA, p)
-            neighbors.append(mutant)
-    return neighbors     # Return a set of successors
 
 def displaySetting():
     print()
     print("Search algorithm: First-Choice Hill Climbing")
     print()
     print("Mutation step size:", DELTA)
-
 main()

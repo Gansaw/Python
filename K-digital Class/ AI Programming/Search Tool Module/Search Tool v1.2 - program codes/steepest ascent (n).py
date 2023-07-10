@@ -5,14 +5,14 @@ def main():
     p = Numeric()    
     p.setVariables()
     solution, minimum = steepestAscent(p)
-    p.storeResult(solution, minimum)
     p.describe()
     displaySetting(p)
+    p.storeResult(solution,minimum)
     p.report()
 
 def steepestAscent(p):
-    current = Numeric.randomInit(p) 
-    valueC = Numeric.evaluate(current)
+    current = p.randomInit() 
+    valueC = p.evaluate(current)
     while True:
         neighbors = p.mutants(current)
         successor, valueS = bestOf(neighbors, p)
@@ -25,9 +25,9 @@ def steepestAscent(p):
 
 def bestOf(neighbors, p):
     best = neighbors[0]
-    bestValue = Numeric.evaluate(best)
+    bestValue = p.evaluate(best)
     for i in range(1,len(neighbors)):
-        value = Numeric.evaluate(neighbors[i])
+        value = p.evaluate(neighbors[i])
         if value < bestValue:
             best = neighbors[i]
             bestValue = value
@@ -38,6 +38,6 @@ def displaySetting(p):
     print()
     print("Search algorithm: Steepest-Ascent Hill Climbing")
     print()
-    print("Mutation step size:", Numeric.getDelta)
+    print("Mutation step size:", p.getDelta())
 
 main()
