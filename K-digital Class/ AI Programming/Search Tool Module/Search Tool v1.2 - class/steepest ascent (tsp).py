@@ -1,16 +1,17 @@
 from tsp import *
 
-NumEval = 0    # Total number of evaluations
-
 
 def main():
+    # Create an instance of TSP
     p = createProblem()    # 'p': (numCities, locations, table)
+    # Call the search algorithm
     solution, minimum = steepestAscent(p)
+    # Show the problem and algorithm settings
     describeProblem(p)
     displaySetting()
+    # Report results
     displayResult(solution, minimum)
     
-
 def steepestAscent(p):
     current = randomInit(p)   # 'current' is a list of city ids
     valueC = evaluate(current, p)
@@ -23,7 +24,6 @@ def steepestAscent(p):
             current = successor
             valueC = valueS
     return current, valueC
-
 
 def mutants(current, p): # Apply inversion
     n = p[0]
@@ -39,13 +39,12 @@ def mutants(current, p): # Apply inversion
             neighbors.append(curCopy)
     return neighbors
 
-def bestOf(neighbors, p): ###
+def bestOf(neighbors, p):
     best = neighbors[0]
-    bestValue = evaluate(best,p) 
-    
+    bestValue = evaluate(best, p)
     for i in range(1, len(neighbors)):
-        newValue = evaluate(neighbors[i],p) 
-        if newValue < bestValue: 
+        newValue = evaluate(neighbors[i], p)
+        if newValue < bestValue:
             best = neighbors[i]
             bestValue = newValue
     return best, bestValue

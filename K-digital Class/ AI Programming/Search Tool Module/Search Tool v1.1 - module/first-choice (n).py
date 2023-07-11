@@ -1,9 +1,11 @@
-from tsp import *
+from numeric import *
+
+LIMIT_STUCK = 100 # Max number of evaluations enduring no improvement
 
 
 def main():
-    # Create an instance of TSP
-    p = createProblem()    # 'p': (numCities, locations, distanceTable)
+    # Create an instance of numerical optimization problem
+    p = createProblem()   # 'p': (expr, domain)
     # Call the search algorithm
     solution, minimum = firstChoice(p)
     # Show the problem and algorithm settings
@@ -11,10 +13,9 @@ def main():
     displaySetting()
     # Report results
     displayResult(solution, minimum)
-
-
+    
 def firstChoice(p):
-    current = randomInit(p)   # 'current' is a list of city ids
+    current = randomInit(p)   # 'current' is a list of values
     valueC = evaluate(current, p)
     i = 0
     while i < LIMIT_STUCK:
@@ -28,18 +29,22 @@ def firstChoice(p):
             i += 1
     return current, valueC
 
-
-def randomMutant(current, p): # Apply inversion
-    while True:
-        i, j = sorted([random.randrange(p[0])
-                       for _ in range(2)])
-        if i < j:
-            curCopy = inversion(current, i, j)
-            break
-    return curCopy
+def randomMutant(current, p):
+    # Pick a random locus
+    i = random.randint(0, len(current) - 1)
+    # Mutate the chosen locus
+    if random.uniform(0, 1) > 0.5:
+        d = DELTA
+    else:
+        d = -DELTA
+    return mutate(current, i, d, p)
 
 def displaySetting():
     print()
     print("Search algorithm: First-Choice Hill Climbing")
+    print()
+    print("Mutation step size:", DELTA)
+    print("Max evaluations with no improvement: {0:,} iterations"
+          .format(LIMIT_STUCK))
 
 main()

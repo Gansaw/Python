@@ -1,15 +1,16 @@
 import random
 import math
 
-DELTA = 0.01   # Mutation step size
+LIMIT_STUCK = 100 # Max number of evaluations enduring no improvement
 NumEval = 0    # Total number of evaluations
+DELTA = 0.01
 
 
 def main():
     # Create an instance of numerical optimization problem
     p = createProblem()   # 'p': (expr, domain)
     # Call the search algorithm
-    solution, minimum = steepestAscent(p)
+    solution, minimum = firstChoice(p)
     # Show the problem and algorithm settings
     describeProblem(p)
     displaySetting()
@@ -36,36 +37,44 @@ def createProblem(): ###
     domain = [varNames, low, up]
     
     for line in infile:
-    # 한 줄씩 읽어오기
-    line = infile.readline()
-       
-    while line != "":
-        data = line.split(",")
-        varNames.append(data[0])
-        low.append(data[1])
-        up.append(data[2])        
-        line = infile.readline()
-        
+    # 한 줄씩 읽어오기           
+        while line != "":
+            data = line.split(",")
+            varNames.append(data[0])
+            low.append(float(data[1]))
+            up.append(float(data[2]))
+            line = infile.readline()        
     infile.close()
     
     return expression, domain
 
 
-def steepestAscent(p):
-    current = randomInit(p) # 'current' is a list of values
+def firstChoice(p):
+    current = randomInit(p)   # 'current' is a list of city ids
     valueC = evaluate(current, p)
-    while True:
-        neighbors = mutants(current, p)
-        successor, valueS = bestOf(neighbors, p)
-        if valueS >= valueC:
-            break
-        else:
+    i = 0
+    while i < LIMIT_STUCK:
+        successor = randomMutant(current, p)
+        valueS = evaluate(successor, p)
+        if valueS < valueC:
             current = successor
             valueC = valueS
+            i = 0              # Reset stuck counter
+        else:
+            i += 1
     return current, valueC
 
 
 def randomInit(p): ###
+    
+    domain = p[1]
+    low = domain[1]
+    up = domain[2]
+    init = []
+
+    for i in range(len(low)):
+        r = random.uniform(low[i], up[i])
+        init.append(r)
     return init    # Return a random initial point
                    # as a list of values
 
@@ -82,8 +91,34 @@ def evaluate(current, p):
         exec(assignment)
     return eval(expr)
 
+def randomMutant(current, p):
+    i = random.randint(0,len(current)-1)
+    if random.uniform(0, 1)>0.5:
+        d = DELTA
+    else:
+        d = -DELTA
+    
+    return mutate(current, i, d, p)
 
 def mutants(current, p): ###
+    neighbors = []
+    
+    for i in range(len(current)):
+        mutant = mutate(current, i, DELTA, p)        
+        neighbors.append(mutant)        
+        mutant = mutate(current, i, -DELTA, p)
+        neighbors.append(mutant)        
+    
+    for j in range(len(current)): 
+        for k in range(j+1, len(current)):
+            mutant = mutate(current, j, DELTA, p)
+            neighbors.append(mutant)
+            mutant = mutate(current, j, -DELTA, p)
+            neighbors.append(mutant)
+            mutant = mutate(mutant, k, DELTA, p)
+            neighbors.append(mutant)
+            mutant = mutate(mutant, i, -DELTA, p)
+            neighbors.append(mutant)
     return neighbors     # Return a set of successors
 
 
@@ -97,6 +132,14 @@ def mutate(current, i, d, p): ## Mutate i-th of 'current' if legal
     return curCopy
 
 def bestOf(neighbors, p): ###
+    best = neighbors[0]
+    bestValue = evaluate(best,p)
+    for i in range(1,len(neighbors)):
+        value = evaluate(neighbors[i],p)
+        if value < bestValue:
+            best = neighbors[i]
+            bestValue = value
+        
     return best, bestValue
 
 def describeProblem(p):
@@ -112,9 +155,11 @@ def describeProblem(p):
 
 def displaySetting():
     print()
-    print("Search algorithm: Steepest-Ascent Hill Climbing")
+    print("Search algorithm: First-Choice Hill Climbing")
     print()
     print("Mutation step size:", DELTA)
+    print("Max evaluations with no improvement: {0:,} iterations"
+          .format(LIMIT_STUCK))
 
 def displayResult(solution, minimum):
     print()
