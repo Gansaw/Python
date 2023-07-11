@@ -1,26 +1,25 @@
-from tsp import *
+from problem import Tsp
 
 LIMIT_STUCK = 100 # Max number of evaluations enduring no improvement
 
 
 def main():
-    # Create an instance of TSP
-    p = createProblem()    # 'p': (numCities, locations, distanceTable)
-    # Call the search algorithm
-    solution, minimum = firstChoice(p)
-    # Show the problem and algorithm settings
-    describeProblem(p)
+    p = Tsp()    
+    p.setVariables()    
+    solution, minimum = firstChoice(p)   
+    p.describe() 
+    # describeProblem(p)
     displaySetting()
-    # Report results
-    displayResult(solution, minimum)
+    p.storeResult(solution,minimum)
+    p.report()
     
 def firstChoice(p):
-    current = randomInit(p)   # 'current' is a list of city ids
-    valueC = evaluate(current, p)
+    current = p.randomInit()   # 'current' is a list of city ids
+    valueC = p.evaluate(current)
     i = 0
     while i < LIMIT_STUCK:
-        successor = randomMutant(current, p)
-        valueS = evaluate(successor, p)
+        successor = p.randomMutant(current)
+        valueS = p.evaluate(successor)
         if valueS < valueC:
             current = successor
             valueC = valueS
@@ -29,14 +28,6 @@ def firstChoice(p):
             i += 1
     return current, valueC
 
-def randomMutant(current, p): # Apply inversion
-    while True:
-        i, j = sorted([random.randrange(p[0])
-                       for _ in range(2)])
-        if i < j:
-            curCopy = inversion(current, i, j)
-            break
-    return curCopy
 
 def displaySetting():
     print()
