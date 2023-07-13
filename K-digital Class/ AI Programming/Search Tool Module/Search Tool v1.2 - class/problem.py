@@ -27,7 +27,7 @@ class Problem:
         pass
 
     def storeResult(self, solution, value):
-        self._soltion = solution
+        self._solution = solution
         self._value = value
 
     def report(self):

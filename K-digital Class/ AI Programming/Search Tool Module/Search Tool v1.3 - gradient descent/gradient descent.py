@@ -1,6 +1,5 @@
-# tsp 방법을 사용할 수 없다. 수치 데이터에만 사용이 가능하다.
-
 from problem import Numeric
+# tsp 방법을 사용할 수 없다. 수치 데이터에만 사용이 가능하다.
 
 
 def main():

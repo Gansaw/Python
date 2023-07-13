@@ -27,7 +27,7 @@ class Problem:
         pass
 
     def storeResult(self, solution, value):
-        self._soltion = solution
+        self._solution = solution
         self._value = value
 
     def report(self):
@@ -86,8 +86,8 @@ class Numeric(Problem):
     
     def gradient(self, x, y):
         grad = []        
-        for i in range(len(xCopy)):
-            xCopy = x[:]            
+        xCopy = x[:]            
+        for i in range(len(xCopy)):            
             xCopy[i] = xCopy[i] + self._dx
             df = self.evaluate(xCopy) - y
             g = df / self._dx
@@ -172,7 +172,7 @@ class Numeric(Problem):
         print(self.coordinate())  # Convert list to tuple
         print("Minimum value: {0:,.3f}".format(self._value))
         Problem.report(self) #super().report
-
+    
     def coordinate(self):
         c = [round(value, 3) for value in self._solution]
         return tuple(c)  # Convert the list to a tuple
