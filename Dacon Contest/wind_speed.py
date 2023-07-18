@@ -70,7 +70,7 @@ model.compile(optimizer='adam', loss='MSE')
 
 
 ## 모델 학습
-model_train = model.fit(x_train, target, epochs=5, batch_size=16)
+model_train = model.fit(x_train, target, epochs=1000, batch_size=16)
 
 ## matplotlib를 이용하여 시각화 진행
 plt.plot(model_train.history['loss'])
