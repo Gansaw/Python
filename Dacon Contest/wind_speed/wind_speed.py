@@ -29,9 +29,9 @@ test_data = pd.read_csv("test.csv")
 # 데이터 프레임 정보 추출
 train_data.info()
 
-
-# 풍향을 예측한다는 점과 데이터를 분석한 결과 시계열 분포인 것을 확인
-# 그리고 측정 시간대가 문자열로 이루어져 있기 때문에 categorical을 이용해야 한다는 것을 확인
+## 결측치가 없다는 것을 확인
+## 풍향을 예측한다는 점과 데이터를 분석한 결과 시계열 분포인 것을 확인
+## 그리고 측정 시간대가 문자열로 이루어져 있기 때문에 categorical을 이용해야 한다는 것을 확인
 
 # train 데이터
 ## 특성과 타겟 분리
@@ -63,21 +63,34 @@ x_train = np.reshape(scaled_features, (scaled_features.shape[0], 1, scaled_featu
 model = tf.keras.models.Sequential()
 model.add(tf.keras.layers.LSTM(64, input_shape=(x_train.shape[1], x_train.shape[2])))
 model.add(tf.keras.layers.Dense(1)) 
+model.summary()
 
 
-## 모델 컴파일 - optimizer은 adam을 이용하였고 풍향을 예측하는 것이기 때문에(수치 의미 有) loss를 MSE를 사용
-model.compile(optimizer='adam', loss='MSE')
+## 모델 컴파일 - optimizer은 adam을 이용하였고 풍향을 예측하는 것이기 때문에(수치 의미 有) loss를 MAE를 사용
+opt = tf.keras.optimizers.Adam(learning_rate=0.001)
+model.compile(optimizer = opt, loss = 'MAE')
+
+## callback 함수를 통해 10회 이상 동일 loss가 나오면 조기종료
+callback = tf.keras.callbacks.EarlyStopping(
+    monitor='val_loss',
+    min_delta=0.0001,
+    patience=10,
+    verbose=1,
+    mode='auto')
 
 
 ## 모델 학습
-model_train = model.fit(x_train, target, epochs=1000, batch_size=16)
+model_train = model.fit(x_train, target, epochs=10000, batch_size=200, 
+                        validation_split=0.2, verbose = 1, callbacks = [callback])
 
 ## matplotlib를 이용하여 시각화 진행
-plt.plot(model_train.history['loss'])
-plt.title('Train Loss')
+plt.plot(model_train.history['loss'], label='Train Loss')
+# plt.plot(model_train.history['val_loss'], label='Validation Loss')
+plt.title('Loss Graph')
 plt.xlabel('Epoch')
-plt.ylabel('MSE')
-plt.show()
+plt.ylabel('MAE')
+plt.legend()
+plt.show() 
 
 
 # test 데이터 (train 데이터에 수행했던 것처럼 test 데이터에도 수행)
