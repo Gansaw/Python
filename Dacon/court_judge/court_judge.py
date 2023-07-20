@@ -37,3 +37,7 @@ def get_vector(vectorizer, df, train_mode):
 X_train = get_vector(vectorizer, train_data, True)
 Y_train = train_data["first_party_winner"]
 X_test = get_vector(vectorizer, test_data, False)
+
+# model 제작
+model = tf.keras.Sequential()
+# model.add(tf.keras.layers.Dense(units = ))
