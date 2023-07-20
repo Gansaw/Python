@@ -1,0 +1,5 @@
+DEBUG:root:debug: 30
+INFO:root:info: 30
+WARNING:root:warning: 30
+ERROR:root:error: 30
+CRITICAL:root:critical: 30
