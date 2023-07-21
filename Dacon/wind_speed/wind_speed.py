@@ -62,6 +62,8 @@ x_train = np.reshape(scaled_features, (scaled_features.shape[0], 1, scaled_featu
 ## LSTM 모델 생성
 model = tf.keras.models.Sequential()
 model.add(tf.keras.layers.LSTM(64, input_shape=(x_train.shape[1], x_train.shape[2])))
+model.add(tf.keras.layers.LSTM(64))
+model.add(tf.keras.layers.BatchNormalization())
 model.add(tf.keras.layers.Dense(1)) 
 model.summary()
 
@@ -70,18 +72,9 @@ model.summary()
 opt = tf.keras.optimizers.Adam(learning_rate=0.001)
 model.compile(optimizer = opt, loss = 'MAE')
 
-## callback 함수를 통해 10회 이상 동일 loss가 나오면 조기종료
-callback = tf.keras.callbacks.EarlyStopping(
-    monitor='val_loss',
-    min_delta=0.0001,
-    patience=10,
-    verbose=1,
-    mode='auto')
-
-
 ## 모델 학습
 model_train = model.fit(x_train, target, epochs=10000, batch_size=200, 
-                        validation_split=0.2, verbose = 1, callbacks = [callback])
+                        validation_split=0.2, verbose = 1)
 
 ## matplotlib를 이용하여 시각화 진행
 plt.plot(model_train.history['loss'], label='Train Loss')
