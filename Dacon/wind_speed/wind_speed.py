@@ -61,30 +61,33 @@ x_train = np.reshape(scaled_features, (scaled_features.shape[0], 1, scaled_featu
 
 ## LSTM 모델 생성
 model = tf.keras.models.Sequential()
-model.add(tf.keras.layers.LSTM(64, input_shape=(x_train.shape[1], x_train.shape[2])))
-model.add(tf.keras.layers.LSTM(64))
+model.add(tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(128, return_sequences=True), input_shape=(x_train.shape[1], x_train.shape[2])))
+model.add(tf.keras.layers.LSTM(128, return_sequences=False))
 model.add(tf.keras.layers.BatchNormalization())
-model.add(tf.keras.layers.Dense(1)) 
+model.add(tf.keras.layers.Dropout(0.25))
+model.add(tf.keras.layers.Dense(units=256))
+model.add(tf.keras.layers.Dense(1))
 model.summary()
+
+
 
 
 ## 모델 컴파일 - optimizer은 adam을 이용하였고 풍향을 예측하는 것이기 때문에(수치 의미 有) loss를 MAE를 사용
 opt = tf.keras.optimizers.Adam(learning_rate=0.001)
 model.compile(optimizer = opt, loss = 'MAE')
-
+ 
 ## 모델 학습
-model_train = model.fit(x_train, target, epochs=10000, batch_size=200, 
+model_train = model.fit(x_train, target, epochs=3000, batch_size=32, 
                         validation_split=0.2, verbose = 1)
 
 ## matplotlib를 이용하여 시각화 진행
-plt.plot(model_train.history['loss'], label='Train Loss')
-# plt.plot(model_train.history['val_loss'], label='Validation Loss')
+plt.plot(model_train.history['loss'], label='loss')
+plt.plot(model_train.history['val_loss'], label='Validation loss')
 plt.title('Loss Graph')
-plt.xlabel('Epoch')
+plt.xlabel('epochs')
 plt.ylabel('MAE')
 plt.legend()
 plt.show() 
-
 
 # test 데이터 (train 데이터에 수행했던 것처럼 test 데이터에도 수행)
 test_features = test_data.drop(['ID'], axis=1)
