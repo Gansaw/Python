@@ -61,20 +61,28 @@ x_train = np.reshape(scaled_features, (scaled_features.shape[0], 1, scaled_featu
 
 ## LSTM 모델 생성
 model = tf.keras.models.Sequential()
-model.add(tf.keras.layers.LSTM(64, input_shape=(x_train.shape[1], x_train.shape[2])))
-model.add(tf.keras.layers.LSTM(64))
+model.add(tf.keras.layers.LSTM(32, input_shape=(x_train.shape[1], x_train.shape[2])))
 model.add(tf.keras.layers.BatchNormalization())
+model.add(tf.keras.layers.Dropout(0.25))
+model.add(tf.keras.layers.Flatten())
+model.add(tf.keras.layers.Dense(units = 64, activation='softmax'))
 model.add(tf.keras.layers.Dense(1)) 
 model.summary()
 
 
+callback = tf.keras.callbacks.EarlyStopping(monitor='val_loss',
+                                            min_delta=0.0001,
+                                            patience=20,
+                                            restore_best_weights=True)
+
+
 ## 모델 컴파일 - optimizer은 adam을 이용하였고 풍향을 예측하는 것이기 때문에(수치 의미 有) loss를 MAE를 사용
-opt = tf.keras.optimizers.Adam(learning_rate=0.001)
+opt = tf.keras.optimizers.RMSprop(learning_rate=0.001)
 model.compile(optimizer = opt, loss = 'MAE')
 
 ## 모델 학습
-model_train = model.fit(x_train, target, epochs=10000, batch_size=200, 
-                        validation_split=0.2, verbose = 1)
+model_train = model.fit(x_train, target, epochs=1000, batch_size=32, 
+                        validation_split=0.2, verbose = 1, callbacks=[callback])
 
 ## matplotlib를 이용하여 시각화 진행
 plt.plot(model_train.history['loss'], label='Train Loss')
