@@ -4,13 +4,14 @@
 This is where HoJin Choi, a 3rd K-Digital trainee at Pusan National University, posts a personal project created during a competition at Dacon.
 
 ### Library
-+ matplotlib
++ random
++ os
++ numpy
 + pandas
-+ requests
-+ beautifulsoup4
-+ datetime
-+ font manager
-+ MySQLdb
++ tensorflow
++ matplotlib
++ sklearn
++ MinMaxScaler
 
 ### License
 이 프로젝트는 MIT 라이선스가 적용되고 있습니다. 세부사항은 LICENSE.md를 참고하세요.
