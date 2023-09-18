@@ -9,6 +9,7 @@ This is a place where Choi Ho-jin, a 3rd-term K-Digital trainee at Pusan Nationa
 + requests
 + beautifulsoup4
 + datetime
++ font manager
 + MySQLdb
 
 ### License
