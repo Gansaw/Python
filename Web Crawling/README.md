@@ -6,6 +6,7 @@ This is a place where Choi Ho-jin, a 3rd-term K-Digital trainee at Pusan Nationa
 ### Library
 + numpy
 + matplotlib
++ pandas
 + requests
 + beautifulsoup4
 
