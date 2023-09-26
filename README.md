@@ -32,7 +32,7 @@ Before operating program, you need to accomplish the following step.
 ### Not required but recommended
 + [D2 Coding Font](https://github.com/naver/d2codingfont)
 
-### Import
+### Library/Package
 + os
 + numpy
 + pandas
