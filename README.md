@@ -12,8 +12,8 @@ Before operating program, you need to accomplish the following step.
 + [Python](https://www.python.org/downloads/release/python-3109/) (3.10.9 ver)
 + [Anaconda](https://www.anaconda.com/download) (2023.03-1 ver)
 
-### Python Tools (select one)
-+ Jupyter notebook (recommeded)
+### Tools
++ Jupyter notebook
   
     ＊  &nbsp;  &nbsp;  install jupyter notebook : anaconda powershell => pip install jupyer notebook
 
@@ -25,12 +25,12 @@ Before operating program, you need to accomplish the following step.
     ＊ &nbsp;&nbsp; require google account
   
     ＊ &nbsp;&nbsp; do not need to install
-
-+ [Pycharm Community Edition](https://www.jetbrains.com/pycharm/download/?section=windows) (2022.2.1 ver)
-+ [Thonny](https://thonny.org/) (4.11 ver)
+  
 
 ### Not required but recommended
 + [D2 Coding Font](https://github.com/naver/d2codingfont)
++ [Thonny](https://thonny.org/) (4.11 ver)
++ [Pycharm Community Edition](https://www.jetbrains.com/pycharm/download/?section=windows) (2022.2.1 ver)
 
 ### Library/Package
 + os
